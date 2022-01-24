@@ -15,4 +15,4 @@ override.tf.json - исключить файл override.tf.json
 *_override.tf.json - исключить файлы заканчивающиеся на _override.tf.json
 
 .terraformrc - исключить файлы с расширением .terraformrc
-terraform.rc - исключить файл terraform.rc
+terraform.rc - исключить файл terraform.rcnew line after creating new branch 'fix'
