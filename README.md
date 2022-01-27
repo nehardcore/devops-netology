@@ -21,6 +21,6 @@ terraform.rc - исключить файл terraform.rc
 
 more changes
 
-main 
-main
-main
+rebase
+rebase
+rebase
