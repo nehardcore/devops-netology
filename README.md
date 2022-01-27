@@ -20,3 +20,4 @@ terraform.rc - исключить файл terraform.rc
 #done some changes
 
 more changes - for testing branches and mergings
+and even more
