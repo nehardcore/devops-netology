@@ -20,3 +20,7 @@ terraform.rc - исключить файл terraform.rc
 #done some changes - Conflict_main
 
 more changes
+
+main 
+main
+main
