@@ -17,7 +17,4 @@ override.tf.json - исключить файл override.tf.json
 .terraformrc - исключить файлы с расширением .terraformrc
 terraform.rc - исключить файл terraform.rc
 
-#done some changes - below will be more changes after the merge
-
-more changes - for testing branches and mergings
-and even more
+#done some changes - conflict1
