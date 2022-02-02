@@ -1,7 +1,7 @@
 2.4. Инструменты Git
 
 1. Найдите полный хеш и комментарий коммита, хеш которого начинается на aefea.
-2. $ git show aefea
+$ git show aefea
 full hash: aefead2207ef7e2aa5dc81a34aedf0cad4c32545
 comment: Update CHANGELOG.md
 
