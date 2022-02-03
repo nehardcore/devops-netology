@@ -40,5 +40,5 @@ c0b176109 prevent log output during init
 8364383c3 Push plugin discovery down into command package  
 
 7. Кто автор функции synchronizedWriters  
-$ git log -S "synchronizedWriters" --pretty=short  
-First commit author is: Martin Atkins <mart@degeneration.co.uk>
+$ git log -S "synchronizedWriters" --pretty=format:"%an"  
+First commit author is: Martin Atkins
