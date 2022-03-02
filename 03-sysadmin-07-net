@@ -1,0 +1,81 @@
+1. Проверьте список доступных сетевых интерфейсов на вашем компьютере. Какие команды есть для этого в Linux и в Windows?  
+Windows: ipconfig -all
+Linux: 
+ip a
+rp r
+cat /etc/resolv.conf
+
+
+2. Какой протокол используется для распознавания соседа по сетевому интерфейсу? Какой пакет и команды есть в Linux для этого?
+sudo apt install lldpd
+команда lldpctl
+
+3. Какая технология используется для разделения L2 коммутатора на несколько виртуальных сетей? Какой пакет и команды есть в Linux для этого? Приведите пример конфига.
+VLAN
+sudo apt install vlan
+sudo modprobe 8021q
+vconfig add eth0 444
+vagrant@vagrant:~$ sudo ip addr add 192.168.1.200/24 brd 192.168.1.255 dev eth0.444
+vagrant@vagrant:~$ sudo ip link set dev eth0.444 up
+
+3: eth0.444@eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 08:00:27:b1:28:5d brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.200/24 brd 192.168.1.255 scope global eth0.444
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:feb1:285d/64 scope link
+       valid_lft forever preferred_lft forever
+
+
+
+4. Какие типы агрегации интерфейсов есть в Linux? Какие опции есть для балансировки нагрузки? Приведите пример конфига.
+mode=0 (balance-rr)
+mode=1 (active-backup)
+mode=2 (balance-xor)
+mode=3 (broadcast)
+mode=4 (802.3ad)
+mode=5 (balance-tlb)
+mode=6 (balance-alb)
+
+конфиг:
+# The bond0 network interface
+auto bond0
+allow-hotplug bond0
+iface bond0 inet static
+address <ip-address>
+netmask <netmask>
+network <network-address>
+broadcast <broadcast-address>
+gateway <gateway-address>
+dns-nameservers <nameserver-one> <nameserver-two>
+dns-search <domain-name>
+up /sbin/ifenslave bond0 eth0
+up /sbin/ifenslave bond0 eth1
+
+5. Сколько IP адресов в сети с маской /29 ? Сколько /29 подсетей можно получить из сети с маской /24. Приведите несколько примеров /29 подсетей внутри сети 10.10.10.0/24.
+8 адресов с маской /29
+в /24 256 адресов, значит 256/8 = 32 подсети можно получить из сети /24
+
+Примеры:
+192.168.0.0/29 - 192.168.0.7/29
+192.168.0.8/29 - 192.168.0.15/29
+
+
+6.Задача: вас попросили организовать стык между 2-мя организациями. Диапазоны 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16 уже заняты. Из какой подсети допустимо взять частные IP адреса? Маску выберите из расчета максимум 40-50 хостов внутри подсети.
+100.64.0.0 — 100.127.255.255 (маска подсети: 255.192.0.0 или /10) Carrier-Grade NAT
+
+ipcalc 100.64.0.0/10 -s 50
+<...>
+Used network: 100.64.0.0/26
+<...>
+маска /26
+
+7.Как проверить ARP таблицу в Linux, Windows? Как очистить ARP кеш полностью? Как из ARP таблицы удалить только один нужный IP?
+
+Windows: 
+arp -a
+netsh interface ip delete arpcache
+
+Linux:
+arp
+ip neigh flush all
+sudo arp -d <IP_address>
